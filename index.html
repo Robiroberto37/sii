@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1 Decembrie - Ziua Națională a României</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Pagina de bun venit */
+        #welcome {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #002B7F 0%, #FCD116 50%, #CE1126 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        #welcome::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 33.33%;
+            top: 0;
+            background: #002B7F;
+            z-index: 1;
+        }
+
+        #welcome::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 33.33%;
+            bottom: 0;
+            background: #CE1126;
+            z-index: 1;
+        }
+
+        .welcome-content {
+            z-index: 2;
+            text-align: center;
+            color: white;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 20px;
+            animation: fadeIn 1.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .welcome-content h1 {
+            font-size: 4em;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.7);
+        }
+
+        .welcome-content p {
+            font-size: 1.5em;
+            margin-bottom: 30px;
+        }
+
+        .enter-btn {
+            padding: 15px 40px;
+            font-size: 1.2em;
+            background: #FCD116;
+            color: #002B7F;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .enter-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+        }
+
+        /* Container principal */
+        #main-content {
+            display: none;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(90deg, #002B7F, #FCD116, #CE1126);
+            padding: 20px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        /* Navigare */
+        nav {
+            background: #002B7F;
+            padding: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .nav-btn {
+            padding: 12px 25px;
+            background: #FCD116;
+            color: #002B7F;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            font-size: 1em;
+        }
+
+        .nav-btn:hover {
+            background: #CE1126;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .nav-btn.active {
+            background: #CE1126;
+            color: white;
+        }
+
+        /* Secțiuni */
+        .section {
+            display: none;
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            min-height: 60vh;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .section h2 {
+            color: #002B7F;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            border-bottom: 4px solid #FCD116;
+            padding-bottom: 10px;
+        }
+
+        .section p {
+            line-height: 1.8;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .section ul {
+            margin-left: 30px;
+            line-height: 2;
+        }
+
+        .section li {
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        /* Galerie foto */
+        .gallery {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            margin-top: 30px;
+            align-items: center;
+        }
+
+        .gallery-item {
+            width: 100%;
+            max-width: 600px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        .gallery-caption {
+            background: #002B7F;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 1.1em;
+        }
+
+        .gallery-description {
+            padding: 15px;
+            text-align: center;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Video */
+        .video-container {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .video-container iframe {
+            width: 100%;
+            max-width: 800px;
+            height: 450px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+
+        /* Quiz */
+        .quiz-container {
+            background: #f5f5f5;
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .quiz-name-input {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .quiz-name-input input {
+            padding: 15px;
+            font-size: 1.1em;
+            border: 2px solid #002B7F;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .quiz-name-input label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+            color: #002B7F;
+            font-weight: bold;
+        }
+
+        .question {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            border-left: 5px solid #002B7F;
+        }
+
+        .question h3 {
+            color: #002B7F;
+            margin-bottom: 15px;
+        }
+
+        .option {
+            padding: 12px;
+            margin: 8px 0;
+            background: #e8e8e8;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .option:hover {
+            background: #FCD116;
+        }
+
+        .option.correct {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .option.wrong {
+            background: #CE1126;
+            color: white;
+        }
+
+        .quiz-result {
+            text-align: center;
+            font-size: 1.5em;
+            margin-top: 20px;
+            padding: 20px;
+            background: #002B7F;
+            color: white;
+            border-radius: 10px;
+            display: none;
+        }
+
+        .finish-quiz-btn {
+            display: block;
+            margin: 30px auto;
+            padding: 15px 40px;
+            font-size: 1.2em;
+            background: #CE1126;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .finish-quiz-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+        }
+
+        .results-list {
+            margin-top: 30px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .results-list h3 {
+            color: #002B7F;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .result-item {
+            padding: 10px;
+            margin: 10px 0;
+            background: #f0f0f0;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .result-item.new-result {
+            animation: highlight 1s ease-in-out;
+        }
+
+        @keyframes highlight {
+            0%, 100% { background: #f0f0f0; }
+            50% { background: #FCD116; }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .welcome-content h1 {
+                font-size: 2.5em;
+            }
+
+            .welcome-content p {
+                font-size: 1.2em;
+            }
+
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            nav {
+                flex-direction: column;
+            }
+
+            .nav-btn {
+                width: 100%;
+            }
+
+            .section h2 {
+                font-size: 2em;
+            }
+
+            .gallery-item img {
+                height: 300px;
+            }
+
+            .video-container iframe {
+                height: 250px;
+            }
+
+            .person-card img {
+                width: 150px;
+                height: 200px;
+            }
+        }
+
+        /* Card persoane */
+        .person-card {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            border-left: 5px solid #CE1126;
+            text-align: center;
+        }
+
+        .person-card img {
+            width: 200px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin: 20px auto;
+            display: block;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .person-card h3 {
+            color: #002B7F;
+            margin-bottom: 10px;
+        }
+
+        .person-card p {
+            text-align: center;
+        }
+
+        /* Footer */
+        footer {
+            background: #002B7F;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Pagina de bun venit -->
+    <div id="welcome">
+        <div class="welcome-content">
+            <h1> 1 DECEMBRIE </h1>
+            <p>Ziua Națională a României</p>
+            <p>Marea Unire - 1918</p>
+            <button class="enter-btn" onclick="enterSite()">Bun venit!</button>
+        </div>
+    </div>
+
+    <!-- Conținut principal -->
+    <div id="main-content">
+        <header>
+            <h1>1 Decembrie - Ziua Națională a României </h1>
+        </header>
+
+        <nav>
+            <button class="nav-btn active" onclick="showSection('evenimente')">Evenimente Antecedente</button>
+            <button class="nav-btn" onclick="showSection('context')">Contextul Istoric</button>
+            <button class="nav-btn" onclick="showSection('unire')">Ce a dus la Unire</button>
+            <button class="nav-btn" onclick="showSection('persoane')">Personalități</button>
+            <button class="nav-btn" onclick="showSection('media')">Foto & Video</button>
+            <button class="nav-btn" onclick="showSection('cronologie')">Cronologie</button>
+            <button class="nav-btn" onclick="showSection('quiz')">Quiz</button>
+        </nav>
+
+        <!-- Secțiunea Evenimente Antecedente -->
+        <div id="evenimente" class="section active">
+            <h2>Evenimente Antecedente</h2>
+            <p>Marea Unire din 1 Decembrie 1918 nu a fost un simplu eveniment întâmplător, ci reprezintă culminația unui proces istoric de secole în care poporul român și-a exprimat constant dorința de unitate națională. De la primele încercări de unificare politică până la realizarea visului național, drumul a fost lung și plin de sacrificii.</p>
+            
+            <h3 style="color: #CE1126; margin-top: 30px;">Evenimente importante:</h3>
+            <ul>
+                <!-- 1600 - Mihai Viteazul -->
+<li><strong>1600 - Mihai Viteazul și prima unire</strong> - Domnul Țării Românești realizează pentru prima dată în istorie unirea politică a Țării Românești, Moldovei și Transilvaniei. Deși unirea a durat doar un an, gestul său a rămas în conștiința poporului ca dovadă că visul unității este posibil și a inspirat generațiile viitoare de luptători pentru cauza națională.</li>
+
+<!-- 1848 - Revoluția -->
+<li><strong>1848 - Revoluția și trezirea națională</strong> - În contextul Primăverii Popoarelor europene, mișcări revoluționare cuprind toate provinciile românești. În Țara Românească apare Proclamația de la Islaz, în Moldova se desfășoară mișcări similare, iar la Blaj zeci de mii de români cer drepturi egale. Deși revoluțiile sunt înăbușite, ideea că românii formează o singură națiune și "Unirea face puterea" devine lozincă permanentă.</li>
+
+<!-- 1848 - Adunarea de la Blaj -->
+<li><strong>3-15 mai 1848 - Adunarea de la Blaj</strong> - Peste 40.000 de români din Transilvania se adună pe Câmpia Libertății de la Blaj pentru a cere drepturi naționale egale cu celelalte națiuni din Imperiul Habsburgic. Condusă de lideri precum Simion Bărnuțiu și Avram Iancu, adunarea marchează prima manifestare în masă a conștiinței naționale a românilor transilvăneni și pregătește terenul pentru unirea din 1918.</li>
+
+<!-- 1859 - Unirea Principatelor -->
+<li><strong>24 ianuarie 1859 - Unirea Principatelor Române</strong> - Printr-o manevră politică genială, Alexandru Ioan Cuza este ales domn atât în Moldova (5 ianuarie), cât și în Țara Românească (24 ianuarie), realizând astfel unirea celor două principate. Acest eveniment constituie primul pas concret spre România Mare și creează cadrul instituțional al statului modern român. Reformele lui Cuza (secularizarea averilor mănăstirești, legea rurală, învățământul obligatoriu) modernizează societatea.</li>
+
+<!-- 1877 - Independența -->
+<li><strong>9 mai 1877 - Proclamarea independenței</strong> - România își proclamă independența deplină față de Imperiul Otoman. În Războiul de Independență (1877-1878), armata română luptă eroic alături de Rusia în bătălii legendare precum Plevna, Grivița și Smârdan. Peste 10.000 de români își sacrifică viața pentru libertate. Independența este recunoscută internațional la Congresul de la Berlin (1878), oferind României legitimitatea necesară pentru viitoarele revendicări teritoriale.</li>
+
+<!-- 1881 - Regatul -->
+<li><strong>10 mai 1881 - Proclamarea Regatului României</strong> - Principatul României devine Regat, iar Carol I este încoronat ca prim rege al României. Acest moment marchează intrarea deplină a României în familia marilor puteri europene și consolidează instituțiile statului modern. Statutul de regat oferă baza juridică și prestigiul internațional necesar pentru viitoarele extinderi teritoriale care vor duce la România Mare.</li>
+
+<!-- 1916 - Intrarea în război -->
+<li><strong>27 august 1916 - Intrarea în Primul Război Mondial</strong> - România ia decizia istorică de a intra în Primul Război Mondial de partea Antantei (Franța, Anglia, Rusia) cu scopul de a elibera românii din Transilvania, Banat și Bucovina aflați sub dominație austro-ungară. Deși campania din 1916 aduce înfrângeri și ocuparea Bucureștiului, sacrificiul imens al poporului român (peste 800.000 de morți) va legitima pe deplin revendicările teritoriale de la finalul războiului.</li>
+
+<!-- 1917 - Mărășești -->
+<li><strong>Iulie-august 1917 - Bătălia de la Mărășești</strong> - Una dintre cele mai sangeroase și eroice bătălii ale Primului Război Mondial. Armata română, reorganizată și refăcută sub comanda generalului Eremia Grigorescu, rezistă atacurilor masive ale armatelor germane și austro-ungare. Victoria de la Mărășești salvează Moldova de ocupație, păstrează România în război și demonstrează demnitatea și curajul soldatului român, consolidând dreptul moral la Marea Unire.</li>
+
+<!-- 1918 - Sfârșitul războiului -->
+<li><strong>11 noiembrie 1918 - Armistițiul și destrămarea imperiilor</strong> - Armistițiul de la Compiègne pune capăt Primului Război Mondial cu victoria Antantei. Puterile Centrale (Germania, Austro-Ungaria) sunt învinse, iar imperiile multinationale se destramă. Acest context geopolitic, împreună cu principiul autodeterminării națiunilor promovat de președintele american Woodrow Wilson, creează momentul istoric ideal pentru realizarea visului secular al românilor: Marea Unire.</li>
+            </ul>
+        </div>
+
+        <!-- Secțiunea Context Istoric -->
+        <div id="context" class="section">
+            <h2>Contextul Istoric</h2>
+
+<div class="person-card">
+    <h3> Situația românilor la începutul secolului XX</h3>
+    <p>La începutul secolului XX, poporul român trăia o realitate dramatică: deși uniți prin limbă, cultură și tradiții, românii erau împărțiți politic între patru imperii și state diferite. Această fragmentare era rezultatul unor secole de dominație străină și al jocurilor geopolitice ale marilor puteri europene.</p>
+</div>
+
+<div class="person-card">
+    <h3> Regatul României - Statul liber dar incomplet</h3>
+    <p><strong>Teritoriu:</strong> Vechiul Regat cuprindea Muntenia, Oltenia, Moldova și Dobrogea<br>
+    <strong>Populație:</strong> Aproximativ 7,5 milioane de locuitori<br>
+    <strong>Statut:</strong> Stat suveran și independent din 1877, regat din 1881<br>
+    <strong>Situația:</strong> România era liberă, dar idealul național rămânea neîmplinit. Peste jumătate din românii din lume trăiau în afara granițelor Regatului, sub dominație străină, adesea discriminați și lipsiți de drepturi fundamentale.</p>
+</div>
+
+<div class="person-card">
+    <h3> Transilvania, Banatul, Crișana și Maramureșul</h3>
+    <p><strong>Sub dominația:</strong> Imperiului Austro-Ungar (din 1867)<br>
+    <strong>Populație românească:</strong> Peste 3 milioane de români<br>
+    <strong>Situația:</strong> Deși reprezentau majoritatea populației în Transilvania, românii erau tratați ca cetățeni de mâna a doua. Maghiarizarea forțată, lipsa drepturilor politice egale și discriminarea în învățământ și administrație erau realități zilnice. Bisericile și școlile românești erau persecutate, iar elita intelectuală română lupta pentru recunoașterea drepturilor naționale.</p>
+</div>
+
+<div class="person-card">
+    <h3> Basarabia - Sub imperiul țarist</h3>
+    <p><strong>Sub dominația:</strong> Imperiului Rus (din 1812)<br>
+    <strong>Populație românească:</strong> Aproximativ 2 milioane de români<br>
+    <strong>Situația:</strong> Anexată de Rusia în urma Tratatului de la București (1812), Basarabia a fost supusă unei politici intense de rusificare. Limba română era interzisă în administrație și școli, iar populația era forțată să adopte limba și cultura rusă. Identitatea românească era sistematic reprimată, iar Biserica Ortodoxă era folosită ca instrument de rusificare.</p>
+</div>
+
+<div class="person-card">
+    <h3> Bucovina - Sub coroana habsburgică</h3>
+    <p><strong>Sub dominația:</strong> Imperiului Austro-Ungar (anexată în 1775)<br>
+    <strong>Populație românească:</strong> Aproximativ 300.000 de români<br>
+    <strong>Situația:</strong> Deși administrația austriacă era mai tolerantă decât cea maghiară din Transilvania, românii bucovineni sufereau de pe urma politicii de germanizare și a colonizării cu populații germane și ucrainene. Cu toate acestea, Bucovina a devenit un important centru cultural românesc, cu o elite intelectuală activă în promovarea conștiinței naționale.</p>
+</div>
+
+<div class="person-card">
+    <h3> Primul Război Mondial - Catalizatorul schimbării</h3>
+    <p><strong>Perioada:</strong> 1914-1918<br>
+    <strong>Impact:</strong> Primul Război Mondial a fost cel mai sângeros conflict din istoria omenirii până atunci, cu peste 17 milioane de morți. Războiul a zguduit temeliile ordinii vechi europene și a dus la prăbușirea a patru imperii: Imperiul German, Austro-Ungar, Rusesc și Otoman.<br><br>
+    <strong>Pentru români:</strong> Războiul a reprezentat atât o tragedie, cât și o oportunitate istorică. România a intrat în război în 1916 cu scopul de a elibera românii din Transilvania. Deși a suferit înfrângeri devastatoare și ocuparea capitalei, rezistența eroică și sacrificiul imens (peste 800.000 de români au murit) au legitimat pe deplin aspirațiile de unire națională.</p>
+</div>
+
+<div class="person-card">
+    <h3> Noua ordine mondială - Principiile wilsoniene</h3>
+    <p><strong>Context:</strong> În ianuarie 1918, președintele american Woodrow Wilson a prezentat celebrele sale "14 puncte", principii care urmau să ghideze pacea post-belică.<br>
+    <strong>Principiul cheie:</strong> Autodeterminarea națională - dreptul fiecărui popor de a-și alege propria formă de guvernare și apartenența statală.<br>
+    <strong>Impact:</strong> Aceste principii au oferit legitimitate internațională aspirațiilor naționale ale popoarelor subjugate din imperiile multinationale. Pentru români, ele reprezentau argumentul moral și juridic pentru realizarea unirii.</p>
+</div>
+
+<div class="person-card">
+    <h3> Mișcarea națională românească</h3>
+    <p>De-a lungul secolului al XIX-lea și începutul secolului XX, în toate provinciile românești s-au dezvoltat puternice mișcări naționale:<br><br>
+    
+    <strong>În Transilvania:</strong> Partidul Național Român (fondat în 1881) conducea lupta politică pentru drepturi egale. Memorandumul din 1892, adresat împăratului Franz Joseph, denunța discriminarea românilor. Lideri precum Iuliu Maniu, Alexandru Vaida-Voevod, Vasile Goldiș organizau rezistența pașnică împotriva maghiarizării.<br><br>
+    
+    <strong>În Basarabia:</strong> Intelectualitatea românească (Alexei Mateevici, Pantelimon Halippa) menținea vie flacăra identității naționale prin literatură, presă și cultură, în ciuda represiunii țariste.<br><br>
+    
+    <strong>În Bucovina:</strong> Organizații culturale românești (Societatea pentru cultură și literatură) promovau conștiința națională și pregăteau terenul pentru unire.</p>
+</div>
+
+<div class="person-card">
+    <h3> Momentul istoric - Toamna lui 1918</h3>
+    <p><strong>Octombrie-noiembrie 1918:</strong> Imperiul Austro-Ungar se destramă rapid. La Viena, la Budapesta, la Praga, naționalitățile proclamă independența sau unirea cu statele-mamă. Este momentul pe care românii îl așteptau de secole.<br><br>
+    
+    <strong>Factori care s-au aliniat perfect:</strong><br>
+    • Destrămarea Imperiului Austro-Ungar care ținea captivi românii transilvăneni<br>
+    • Victoria Antantei, alături de care România luptase cu prețul a sute de mii de vieți<br>
+    • Revoluția rusă care a slăbit controlul asupra Basarabiei<br>
+    • Principiile wilsoniene care legitimau autodeterminarea națională<br>
+    • Maturizarea mișcării naționale românești în toate provinciile<br>
+    • Consensul internațional favorabil reconfigurării Europei Centrale<br><br>
+    
+    <strong>Rezultatul:</strong> Toate aceste elemente au creat "fereastra istorică" perfectă pentru realizarea marelui vis românesc - unirea tuturor românilor într-un singur stat național. Ceea ce părea imposibil cu câțiva ani înainte devenea acum nu doar posibil, ci și inevitabil.</p>
+</div>
+
+<div class="person-card" style="background: linear-gradient(135deg, #002B7F 0%, #FCD116 100%); color: white; border: none;">
+    <h3 style="color: white;"> Concluzie</h3>
+    <p>Contextul istoric al anului 1918 a fost unic și irepetabil. Conjunctura internațională, sacrificiul în război, maturitatea mișcării naționale și prăbușirea imperiilor au creat momentul perfect pentru împlinirea visului multisecular al românilor. <strong>1 Decembrie 1918</strong> nu a fost un accident istoric, ci culminația logică și inevitabilă a unui proces de secole de luptă pentru libertate și unitate națională.</p>
+</div>
+        </div>
+
+        <!-- Secțiunea Ce a dus la Unire -->
+        <div id="unire" class="section">
+            <h2>Ce a dus la Marea Unire</h2>
+<p style="font-size: 1.2em; text-align: center; color: #002B7F; font-weight: bold; margin-bottom: 30px;">Unirea din 1 Decembrie 1918 a fost rezultatul convergenței perfecte a mai multor factori istorici decisivi:</p>
+
+<div class="person-card">
+    <h3> 1. Conștiința Națională Românească</h3>
+    <p>Secolul al XIX-lea a fost epoca treziei naționale. Românii din toate provinciile și-au dat seama că, deși despărțiți de granițe politice, sunt un singur popor unit prin limba română, credința ortodoxă, tradiții comune și o istorie milenară. Mișcarea culturală și politică românească din Transilvania, Basarabia și Bucovina a menținut vie flacăra identității naționale chiar și sub opresiunea imperiilor străine.</p>
+</div>
+
+<div class="person-card">
+    <h3> 2. Sacrificiul în Primul Război Mondial</h3>
+    <p>România a intrat în război în 1916 cu un singur scop: eliberarea fraților din Transilvania. Prețul a fost uriaș - peste 800.000 de români au murit, capitala a fost ocupată, țara devastată. Dar acest sacrificiu suprem a dat României legitimitatea morală și juridică de a revendica teritoriile locuite de români. Victoria finală alături de Antantă a transformat visul în realitate.</p>
+</div>
+
+<div class="person-card">
+    <h3> 3. Adunările Naționale din 1918</h3>
+    <p>Anul 1918 a adus trei momente istorice decisive:<br><br>
+    <strong>• 27 martie 1918</strong> - Sfatul Țării de la Chișinău votează Unirea Basarabiei cu România<br>
+    <strong>• 15 noiembrie 1918</strong> - Congresul General de la Cernăuți proclamă Unirea Bucovinei<br>
+    <strong>• 1 decembrie 1918</strong> - Adunarea Națională de la Alba Iulia, cu peste 100.000 de participanți, hotărăște Unirea Transilvaniei, Banatului, Crișanei și Maramureșului cu România<br><br>
+    Aceste adunări au fost expresia clară și democratică a voinței poporului român de a trăi unit într-un singur stat național.</p>
+</div>
+
+<div class="person-card">
+    <h3> 4. Contextul Internațional Favorabil</h3>
+    <p>Victoria Antantei în Primul Război Mondial și destrămarea imperiilor multinationale au creat momentul istoric perfect. Principiile președintelui american Woodrow Wilson privind autodeterminarea națiunilor au oferit cadrul juridic internațional. Marile puteri aliate au recunoscut dreptul românilor de a se uni, legitimând astfel Marea Unire pe scena mondială.</p>
+</div>
+
+<div class="person-card" style="background: #FCD116; border-left: 5px solid #CE1126;">
+    <h3 style="color: #002B7F;">💫 Rezultatul Final</h3>
+    <p style="color: #002B7F;">Când toate aceste forțe - conștiința națională, sacrificiul în război, voința populară exprimată în adunări și sprijinul internațional - s-au unit în toamna lui 1918, visul secular al românilor s-a împlinit. <strong>România Mare</strong> nu a fost o întâmplare, ci rezultatul logic al luptei de veacuri pentru libertate și unitate națională.</p>
+</div>
+        </div>
+
+        <!-- Secțiunea Personalități -->
+        <div id="persoane" class="section">
+            <h2>Personalități care au contribuit la Marea Unire</h2>
+<p style="font-size: 1.1em; text-align: center; margin-bottom: 30px; color: #002B7F;">Marea Unire a fost realizată prin efortul și sacrificiul a mii de oameni, dar aceste personalități au avut un rol decisiv în realizarea visului național:</p>
+
+<div class="person-card">
+    <h3> Regele Ferdinand I (1865-1927) - "Regele Întregitor"</h3>
+    <img src="Personalitati/Regele-Ferdinand-I.jpg" alt="Regele Ferdinand I">
+    <p><strong>Rol:</strong> Regele României între 1914-1927<br><br>
+    Ferdinand I a devenit rege în 1914, în pragul celui mai mare conflict mondial. Deși de origine germană (Hohenzollern-Sigmaringen), a ales să ducă România în război împotriva Puterilor Centrale, alături de Antantă, pentru idealul național. A rămas alături de poporul său în momentele cele mai grele - când București a fost ocupat, când țara era devastată. A refuzat să capituleze și s-a retras la Iași, unde a continuat rezistența. La 1 decembrie 1918, visul său și al poporului român s-a împlinit: România și-a dublat teritoriul și populația. Pentru acest rol crucial în realizarea României Mari, a fost supranumit <strong>"Regele Întregitor"</strong> și <strong>"Regele Loial"</strong>.</p>
+</div>
+
+<div class="person-card">
+    <h3> Regina Maria (1875-1938) - "Mama Răniților"</h3>
+    <img src="Personalitati/Regina-Maria.jpg" alt="Regina Maria">
+    <p><strong>Rol:</strong> Regina României, diplomată și simbol al rezistenței<br><br>
+    Regina Maria, nepoata Reginei Victoria a Angliei, a devenit sufletul rezistenței românești în timpul războiului. A vizitat personal spitalele militare, îngrijind răniții și oferind sprijin moral soldaților. A devenit cunoscută ca <strong>"Mama Răniților"</strong>. După război, a jucat un rol diplomatic crucial la Conferința de Pace de la Paris (1919), unde frumusețea, carisma și inteligența ei au impresionat liderii mondiali și au ajutat la recunoașterea internațională a României Mari. A scris în memoriile sale: <em>"Am văzut România mică devenind România Mare și acesta este triumful vieții mele."</em></p>
+</div>
+
+<div class="person-card">
+    <h3> Iuliu Maniu (1873-1953) - Arhitectul Unirii Transilvaniei</h3>
+    <img src="Personalitati/iuliu_maniu_58985300.jpg" alt="Iuliu Maniu">
+    <p><strong>Rol:</strong> Liderul Partidului Național Român, Președintele Consiliului Dirigent<br><br>
+    Iuliu Maniu a fost principalul organizator al Marii Adunări Naționale de la Alba Iulia din 1 decembrie 1918. Politician de o integritate morală exemplară, a condus lupta pașnică a românilor transilvăneni pentru drepturi egale în Imperiul Austro-Ungar. După Unire, a devenit președintele Consiliului Dirigent al Transilvaniei, asigurând tranziția administrativă și menținând ordinea în provincia nou unită. A fost primul ministru al României de mai multe ori și este considerat unul dintre cei mai mari oameni politici români din toate timpurile. Integritatea sa morală a devenit legendară.</p>
+</div>
+
+<div class="person-card">
+    <h3> Vasile Goldiș (1862-1934) - Tribunul Unirii</h3>
+    <img src="Personalitati/Vasile-Goldis.png" alt="Vasile Goldiș">
+    <p><strong>Rol:</strong> Unul dintre cei "trei mari" ai Unirii, membru al Consiliului Dirigent<br><br>
+    Profesor și publicist, Vasile Goldiș a fost o voce puternică a mișcării naționale românești din Transilvania. A redactat <strong>Rezoluția Unirii de la Alba Iulia</strong>, documentul fundamental care proclama unirea și stabilea principiile noului stat: democrație, libertate religioasă, drepturi egale pentru toate minoritățile. A fost membru în Consiliul Dirigent și a contribuit esențial la organizarea administrativă a Transilvaniei unite. Împreună cu Iuliu Maniu și Ioan Suciu, formează "triumviratul" care a condus procesul unirii Transilvaniei.</p>
+</div>
+
+<div class="person-card">
+    <h3> Gheorghe Pop de Băsești (1835-1919) - Patriarhul Unirii</h3>
+    <img src="Personalitati/George-Pop-de-Basesti.jpg" alt="Gheorghe Pop de Băsești">
+    <p><strong>Rol:</strong> Președintele Marii Adunări Naționale de la Alba Iulia<br><br>
+    La 83 de ani, Gheorghe Pop de Băsești a fost ales să prezideze Marea Adunare Națională de la Alba Iulia, fiind simbolul continuității luptei pentru drepturi naționale. Timp de peste 60 de ani, a luptat neobosit pentru cauza românească în Imperiul Austro-Ungar. A fost deputat în Parlamentul de la Budapesta și Viena, unde a denunțat constant discriminarea românilor. Prezența sa la Alba Iulia a legat generațiile - de la luptătorii din 1848 până la realizatorii Unirii din 1918. A murit în martie 1919, având satisfacția de a fi văzut visul vieții sale împlinit.</p>
+</div>
+
+<div class="person-card">
+    <h3> Alexandru Vaida-Voevod (1872-1950) - Vocea Unirii</h3>
+    <img src="Personalitati/standard_alexandru-vaida-voevod.jpg" alt="Alexandru Vaida-Voevod">
+    <p><strong>Rol:</strong> Anunțatorul Unirii în Parlamentul de la Budapesta<br><br>
+    Pe 18 octombrie 1918, Alexandru Vaida-Voevod a citit în Parlamentul de la Budapesta <strong>Declarația de Autodeterminare</strong> a românilor din Austro-Ungaria, anunțând oficial intențiile de unire cu România. A fost un moment istoric de curaj extraordinar - în fața autorităților maghiare șocate, a proclamat sfârșitul dominației străine asupra românilor transilvăneni. A fost unul dintre organizatorii Adunării de la Alba Iulia și membru al Consiliului Dirigent. Mai târziu a devenit prim-ministru al României.</p>
+</div>
+
+<div class="person-card">
+    <h3> Ion I.C. Brătianu (1864-1927) - Strateg și Diplomat</h3>
+    <img src="Personalitati/standard_compressed_ion-i-c-bratianu.jpg" alt="Ion I.C. Brătianu">
+    <p><strong>Rol:</strong> Prim-ministru al României, arhitectul intrării în război<br><br>
+    Ion I.C. Brătianu a fost prim-ministrul care a condus România în Primul Război Mondial. A negociat cu Antanta condițiile intrării în război, asigurându-se că România va primi teritoriile locuite de români în caz de victorie. Deși a fost criticat pentru ezitările din 1914-1916, strategia sa s-a dovedit corectă - România a intrat în război în momentul care părea cel mai favorabil. A condus țara prin cele mai grele momente ale războiului și a reprezentat România la Conferința de Pace de la Paris, unde a luptat diplomatic pentru recunoașterea internațională a României Mari.</p>
+</div>
+
+<div class="person-card">
+    <h3> Iuliu Hossu (1885-1970) - Episcopul Unirii</h3>
+    <img src="Personalitati/iuliu-hossu-3.jpg" alt="Iuliu Hossu">
+    <p><strong>Rol:</strong> Episcop greco-catolic, lider spiritual al Unirii<br><br>
+    Iuliu Hossu, episcop greco-catolic de Gherla, a fost unul dintre cei mai influenți lideri religioși ai Unirii. A binecuvântat Adunarea de la Alba Iulia și a fost membru în Consiliul Dirigent. Biserica greco-catolică și ortodoxă au jucat un rol esențial în păstrarea identității românești sub dominația străină. După cel de-al Doilea Război Mondial, a fost persecutat de regimul comunist și a murit în închisoare, fiind beatificat de Papa Ioan Paul al II-lea în 2019 ca martir al credinței.</p>
+</div>
+
+<div class="person-card">
+    <h3> Pantelimon Halippa (1883-1979) - Vocea Basarabiei</h3>
+    <img src="Personalitati/Pantelimon-Halippa.jpg" alt="Pantelimon Halippa">
+    <p><strong>Rol:</strong> Lider al mișcării naționale din Basarabia, membru al Sfatului Țării<br><br>
+    Pantelimon Halippa a fost unul dintre liderii care au proclamat Unirea Basarabiei cu România la 27 martie 1918. Publicist, poet și activist politic, a luptat pentru păstrarea identității românești în Basarabia sub dominația rusă. A fost membru al Sfatului Țării (parlamentul basarabean) și a votat pentru Unire. După anexarea Basarabiei de către URSS în 1940, a fost deportat în Siberia, unde a supraviețuit 15 ani în Gulag. A murit în exil, rămânând un simbol al rezistenței românești din Basarabia.</p>
+</div>
+
+<div class="person-card" style="background: linear-gradient(135deg, #002B7F 0%, #FCD116 100%); color: white; border: none;">
+    <h3 style="color: white;"> Eroi Anonimi</h3>
+    <p>Dincolo de aceste personalități celebre, Marea Unire a fost realizată prin efortul și sacrificiul a mii de oameni obișnuiți: soldații care au murit pe front, țăranii care au venit la Alba Iulia, intelectualii care au păstrat vie flacăra identității naționale, preoții care au învățat copiii limba română în secret. <strong>Marea Unire aparține întregului popor român!</strong></p>
+</div>
+        </div>
+
+        <!-- Secțiunea Media -->
+        <div id="media" class="section">
+            <h2>Galerie Foto & Video</h2>
+            
+            <h3 style="color: #002B7F;">Fotografii Istorice</h3>
+            <div class="gallery">
+                <div class="gallery-item">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Alba_Iulia_1_decembrie_1918.jpg/800px-Alba_Iulia_1_decembrie_1918.jpg" alt="Adunarea de la Alba Iulia">
+                    <div class="gallery-caption">Adunarea de la Alba Iulia - 1 Decembrie 1918</div>
+                    <div class="gallery-description">Peste 100.000 de români s-au adunat la Alba Iulia pentru a proclama Marea Unire. Această fotografie istorică surprinde momentul crucial când Transilvania, Banatul, Crișana și Maramureșul s-au unit cu România.</div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Ferdinand_of_Romania.jpg/400px-Ferdinand_of_Romania.jpg" alt="Regele Ferdinand">
+                    <div class="gallery-caption">Regele Ferdinand I - Regele Întregitor</div>
+                    <div class="gallery-description">Ferdinand I a fost regele României în timpul Marii Uniri. Sub domnia sa, România și-a dublat teritoriul și populația, devenind România Mare. A fost supranumit "Regele Întregitor" pentru acest rol decisiv în istoria națională.</div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Queen_Marie_of_Romania.jpg/400px-Queen_Marie_of_Romania.jpg" alt="Regina Maria">
+                    <div class="gallery-caption">Regina Maria a României</div>
+                    <div class="gallery-description">Regina Maria a fost un simbol al rezistenței românești în timpul Primului Război Mondial. A vizitat spitalele militare, a susținut moralul trupelor și a avut un rol diplomatic important în recunoașterea internațională a Marii Uniri.</div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Iuliu_Maniu.jpg/400px-Iuliu_Maniu.jpg" alt="Iuliu Maniu">
+                    <div class="gallery-caption">Iuliu Maniu - Lider al Unirii</div>
+                    <div class="gallery-description">Iuliu Maniu a fost unul dintre principalii organizatori ai Adunării Naționale de la Alba Iulia. A fost președintele Consiliului Dirigent al Transilvaniei și a jucat un rol crucial în procesul unirii și în organizarea administrativă a provinciilor unite.</div>
+                </div>
+            </div>
+
+            <div class="video-container">
+                <h3 style="color: #002B7F; margin-bottom: 20px;">Video Documentar</h3>
+                <iframe src="https://www.youtube.com/embed/wQN_FLXIcb4" title="1 Decembrie Ziua Nationala a Romaniei" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <p style="margin-top: 20px; font-style: italic;">Documentar despre Marea Unire din 1918</p>
+            </div>
+        </div>
+
+        <!-- Secțiunea Cronologie -->
+        <div id="cronologie" class="section">
+            <h2>Cronologia Unirii - 1918</h2>
+            
+            <div class="person-card">
+                <h3>📅 27 Martie 1918</h3>
+                <p><strong>Unirea Basarabiei cu România</strong> - Sfatul Țării din Chișinău votează unirea cu România cu 86 de voturi pentru, 3 împotrivă și 36 abțineri.</p>
+            </div>
+
+            <div class="person-card">
+                <h3>📅 15 Noiembrie 1918</h3>
+                <p><strong>Unirea Bucovinei cu România</strong> - Congresul General al Bucovinei de la Cernăuți proclamă unirea cu Regatul României.</p>
+            </div>
+
+            <div class="person-card">
+                <h3>📅 1 Decembrie 1918</h3>
+                <p><strong>Marea Unire de la Alba Iulia</strong> - Peste 100.000 de români se adună la Alba Iulia pentru a hotărî unirea Transilvaniei, Banatului, Crișanei și Maramureșului cu România. Adunarea Națională adoptă Rezoluția de Unire cu 1.228 de voturi pentru, 0 împotrivă.</p>
+            </div>
+
+            <div class="person-card">
+                <h3>📅 24 Decembrie 1918</h3>
+                <p><strong>Unirea Bucovinei ratificată</strong> - Decretul de unire a Bucovinei este promulgat oficial.</p>
+            </div>
+
+            <div class="person-card">
+                <h3>📅 1919-1920</h3>
+                <p><strong>Recunoașterea internațională</strong> - Tratatele de pace de la Paris recunosc unirea provinciilor cu România. România Mare devine o realitate recunoscută internațional.</p>
+            </div>
+        </div>
+
+        <!-- Secțiunea Quiz -->
+        <div id="quiz" class="section">
+            <h2>Quiz - Testează-ți cunoștințele!</h2>
+            
+            <div class="quiz-container">
+                <div class="quiz-name-input">
+                    <label for="userName">Introdu numele tău:</label>
+                    <input type="text" id="userName" placeholder="Numele tău aici..." required>
+                </div>
+
+                <div class="question" id="q1">
+                    <h3>1. În ce an a avut loc Marea Unire?</h3>
+                    <div class="option" onclick="selectAnswer(this, false, 'q1')">1916</div>
+                    <div class="option" onclick="selectAnswer(this, true, 'q1')">1918</div>
+                    <div class="option" onclick="selectAnswer(this, false, 'q1')">1920</div>
+                    <div class="option" onclick="selectAnswer(this, false, 'q1')">1922</div>
+                </div>
+
+                <div class="question" id="q2">
+                    <h3>2. Unde a avut loc Adunarea Națională din 1 Decembrie 1918?</h3>
+                    <div class="option" onclick="selectAnswer(this, false, 'q2')">București</div>
+                    <div class="option" onclick="selectAnswer(this, true, 'q2')">Alba Iulia</div>
+                    <div class="option" onclick="selectAnswer(this, false, 'q2')">Iași</div>
+                    <div class="option" onclick="selectAnswer(this, false, 'q2')">Cluj</div>
+                </div>
+
+                <div class="question" id="q3">
+                    <h3>3. Cine a fost regele României în timpul Marii Uniri?</h3>
+                    <div class="option" onclick="selectAnswer(this, false, 'q3')">Carol I</div>
+                    <div class="option" onclick="selectAnswer(this, true, 'q3')">Ferdinand I</div>
+                    <div class="option" onclick="selectAnswer(this, false, 'q3')">Carol II</div>
+                    <div class="option" onclick="selectAnswer(this, false, 'q3')">Mihai I</div>
+                </div>
+
+                <div class="question" id="q4">
+                    <h3>4. Câți oameni au participat la Adunarea de la Alba Iulia?</h3>
+                    <div class="option" onclick="selectAnswer(this, false, 'q4')">Circa 10.000</div>
+                    <div class="option" onclick="selectAnswer(this, false, 'q4')">Circa 50.000</div>
+                    <div class="option" onclick="selectAnswer(this, true, 'q4')">Peste 100.000</div>
+                    <div class="option" onclick="selectAnswer(this, false, 'q4')">Circa 200.000</div>
+                </div>
+
+                <div class="question" id="q5">
+                    <h3>5. Care dintre aceste provincii s-a unit cu România în 27 martie 1918?</h3>
+                    <div class="option" onclick="selectAnswer(this, true, 'q5')">Basarabia</div>
+                    <div class="option" onclick="selectAnswer(this, false, 'q5')">Transilvania</div>
+                    <div class="option" onclick="selectAnswer(this, false, 'q5')">Bucovina</div>
+                    <div class="option" onclick="selectAnswer(this, false, 'q5')">Banatul</div>
+                </div>
+
+                <button class="finish-quiz-btn" onclick="finishQuiz()">Finalizează Quiz-ul</button>
+
+                <div class="quiz-result" id="quiz-result"></div>
+
+                <div class="results-list" id="results-list" style="display: none;">
+                    <h3>📊 Rezultate în Timp Real</h3>
+                    <div id="all-results"></div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>🇷🇴 Trăiască România! 🇷🇴</p>
+            <p>© 2024 - Dedicat Zilei Naționale a României</p>
+        </footer>
+    </div>
+
+    <script>
+        let userAnswers = {};
+        let quizResults = [];
+
+        function enterSite() {
+            document.getElementById('welcome').style.display = 'none';
+            document.getElementById('main-content').style.display = 'block';
+        }
+
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            document.getElementById(sectionId).classList.add('active');
+
+            const buttons = document.querySelectorAll('.nav-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function selectAnswer(element, isCorrect, questionId) {
+            const question = document.getElementById(questionId);
+            
+            if (question.classList.contains('answered')) {
+                return;
+            }
+
+            const options = question.querySelectorAll('.option');
+            options.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+
+            userAnswers[questionId] = isCorrect;
+
+            if (isCorrect) {
+                element.classList.add('correct');
+            } else {
+                element.classList.add('wrong');
+                options.forEach(opt => {
+                    if (opt.onclick.toString().includes('true')) {
+                        opt.classList.add('correct');
+                    }
+                });
+            }
+
+            question.classList.add('answered');
+        }
+
+        async function finishQuiz() {
+            const userName = document.getElementById('userName').value.trim();
+            
+            if (!userName) {
+                alert('Te rog introdu numele tău înainte de a finaliza quiz-ul!');
+                document.getElementById('userName').focus();
+                return;
+            }
+
+            const answeredCount = Object.keys(userAnswers).length;
+            if (answeredCount < 5) {
+                alert('Te rog răspunde la toate întrebările înainte de a finaliza!');
+                return;
+            }
+
+            const score = Object.values(userAnswers).filter(answer => answer === true).length;
+            const totalQuestions = 5;
+            const percentage = (score / totalQuestions) * 100;
+
+            let message = '';
+            if (percentage === 100) {
+                message = '🎉 Perfect! Ești un adevărat expert în istoria României!';
+            } else if (percentage >= 80) {
+                message = '👏 Foarte bine! Cunoști foarte bine istoria Marii Uniri!';
+            } else if (percentage >= 60) {
+                message = '👍 Bine! Mai ai câteva lucruri de învățat despre Marea Unire.';
+            } else {
+                message = '📚 Mai citește despre Marea Unire pentru a-ți îmbunătăți cunoștințele!';
+            }
+
+            const resultDiv = document.getElementById('quiz-result');
+            resultDiv.innerHTML = `
+                <h3>${userName}, scorul tău: ${score}/${totalQuestions} (${percentage}%)</h3>
+                <p>${message}</p>
+            `;
+            resultDiv.style.display = 'block';
+
+            const result = {
+                name: userName,
+                score: score,
+                total: totalQuestions,
+                percentage: percentage,
+                timestamp: new Date().toLocaleString('ro-RO')
+            };
+
+            try {
+                await window.storage.set(`quiz_result_${Date.now()}`, JSON.stringify(result), true);
+                await loadResults();
+            } catch (error) {
+                console.log('Rezultatele sunt salvate local');
+                quizResults.push(result);
+                displayResults();
+            }
+
+            document.querySelector('.finish-quiz-btn').style.display = 'none';
+        }
+
+        async function loadResults() {
+            try {
+                const keys = await window.storage.list('quiz_result_', true);
+                quizResults = [];
+                
+                if (keys && keys.keys) {
+                    for (const key of keys.keys) {
+                        try {
+                            const data = await window.storage.get(key, true);
+                            if (data && data.value) {
+                                quizResults.push(JSON.parse(data.value));
+                            }
+                        } catch (e) {
+                            console.log('Eroare la citirea rezultatului:', e);
+                        }
+                    }
+                }
+                
+                displayResults();
+            } catch (error) {
+                console.log('Folosim salvare locală');
+                displayResults();
+            }
+        }
+
+        function displayResults() {
+            const resultsContainer = document.getElementById('all-results');
+            const resultsList = document.getElementById('results-list');
+            
+            if (quizResults.length === 0) {
+                return;
+            }
+
+            resultsList.style.display = 'block';
+            
+            quizResults.sort((a, b) => b.percentage - a.percentage);
+            
+            resultsContainer.innerHTML = quizResults.map((result, index) => {
+                const isNew = index === quizResults.length - 1;
+                return `
+                    <div class="result-item ${isNew ? 'new-result' : ''}">
+                        <span><strong>${result.name}</strong> - ${result.score}/${result.total} (${result.percentage}%)</span>
+                        <span style="font-size: 0.9em; color: #666;">${result.timestamp}</span>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        window.addEventListener('load', loadResults);
+    </script>
+</body>
+</html>
